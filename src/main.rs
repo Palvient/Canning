@@ -3,18 +3,21 @@ use std::collections::HashMap;
 
 mod controllers {        
     pub mod fill;   
-    pub mod get;      
+    pub mod get;    
+    pub mod empty;
 }
 
-use controllers::{fill, get};
+use controllers::{fill, get, empty};
 
 fn main() {
     let mut cans: HashMap<String, String> = HashMap::new();
 
     let args: Vec<String> = env::args().collect();
 
-    if args.len() < 4 {   
-        eprintln!("Usage: can fill <key> <value>");
+    let help_msg: String = "Usage: \n canning fill <key> <value> \n canning get <key> \n canning empty <key> \n canning delete <key> \n canning list".to_string();
+
+    if args.len() < 3 {   
+        eprintln!("{}", help_msg);
         return;
     }
 
@@ -29,13 +32,17 @@ fn main() {
             get::run(&mut cans, &key);
         }
         "empty" => {
-            println!("Feature still in development")
+            let key = args[2].clone();
+            empty::run(&mut cans, key)
         }
         "delete" => {
             println!("Feature still in development")
         }
         "list" => {
             println!("Feature still in development")
+        }
+        "help" => {
+            println!("{}", help_msg)
         }
         _ => eprintln!("Unknown command: {}", args[1]),
     }
