@@ -2,10 +2,11 @@ use std::env;
 use std::collections::HashMap;
 
 mod controllers {        
-    pub mod fill;         
+    pub mod fill;   
+    pub mod get;      
 }
 
-use controllers::fill; 
+use controllers::{fill, get};
 
 fn main() {
     let mut cans: HashMap<String, String> = HashMap::new();
@@ -24,7 +25,8 @@ fn main() {
             fill::run(&mut cans, key, value);
         }
         "get" => {
-            println!("Feature still in development")
+            let key = args[2].clone();
+            get::run(&mut cans, &key);
         }
         "empty" => {
             println!("Feature still in development")
