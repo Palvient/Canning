@@ -5,9 +5,10 @@ mod controllers {
     pub mod fill;   
     pub mod get;    
     pub mod empty;
+    pub mod remove;
 }
 
-use controllers::{fill, get, empty};
+use controllers::{fill, get, empty, remove};
 
 fn main() {
     let mut cans: HashMap<String, String> = HashMap::new();
@@ -35,8 +36,9 @@ fn main() {
             let key = args[2].clone();
             empty::run(&mut cans, key)
         }
-        "delete" => {
-            println!("Feature still in development")
+        "remove" => {
+            let key = args[2].clone();
+            remove::run(&mut cans, key);
         }
         "list" => {
             println!("Feature still in development")
