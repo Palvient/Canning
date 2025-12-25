@@ -6,16 +6,17 @@ mod controllers {
     pub mod get;    
     pub mod empty;
     pub mod remove;
+    pub mod list;
 }
 
-use controllers::{fill, get, empty, remove};
+use controllers::{fill, get, empty, remove, list};
 
 fn main() {
     let mut cans: HashMap<String, String> = HashMap::new();
 
     let args: Vec<String> = env::args().collect();
 
-    let help_msg: String = "Usage: \n canning fill <key> <value> \n canning get <key> \n canning empty <key> \n canning delete <key> \n canning list".to_string();
+    let help_msg: String = "Usage: \n canning fill <key> <value> \n canning get <key> \n canning empty <key> \n canning remove <key> \n canning list".to_string();
 
     if args.len() < 3 {   
         eprintln!("{}", help_msg);
@@ -41,7 +42,7 @@ fn main() {
             remove::run(&mut cans, key);
         }
         "list" => {
-            println!("Feature still in development")
+            list::run(&mut cans);
         }
         "help" => {
             println!("{}", help_msg)
